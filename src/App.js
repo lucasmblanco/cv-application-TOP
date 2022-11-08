@@ -14,7 +14,11 @@ class App extends React.Component{
         phone: '', 
         education: [], 
         institution: {
-          id: uniqid()
+          id: uniqid(), 
+          name: '',
+          title: '',
+          from: '',
+          to: '',
         },
         show: false,
       }
@@ -30,6 +34,10 @@ class App extends React.Component{
      education: this.state.education.concat(this.state.institution),
      institution: {
       id: uniqid(),
+      name: '',
+      title: '',
+      from: '',
+      to: '',
      }
      })
      console.log(this.state.institution.id)
@@ -46,7 +54,11 @@ class App extends React.Component{
   recieveDataFromChild(data){
     this.setState({
       institution: {
-        data
+        id: this.state.institution.id,
+        name: data.name,
+        title: data.title, 
+        from: data.from,
+        to: data.to, 
       }
     })
   }

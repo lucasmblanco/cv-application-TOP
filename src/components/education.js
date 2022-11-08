@@ -21,7 +21,7 @@ class Education extends React.Component {
     }
 
     render(){
-        const { name, title, from, to} = this.state;  
+        const { name, title, from, to } = this.state;  
             return(
                     <div key={this.props.data.id}>
                         <label>
