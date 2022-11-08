@@ -3,7 +3,7 @@ import React from "react";
 import Education from './components/education'; 
 //import Experience from "./components/experience";
 import uniqid from "uniqid"
-
+import Overview from './components/Overview';
 
 class App extends React.Component{
   constructor(props){
@@ -14,55 +14,57 @@ class App extends React.Component{
         phone: '', 
         education: [], 
         institution: {
-          id: uniqid(), 
-          name:'',
-          title: '',
-          from: '',
-          to:'',
+          id: uniqid()
         },
-        experience: [],
-        company: {
-          id: uniqid(), 
-          position: '', 
-          task: '', 
-          from: '', 
-          to: '', 
-        }
+        show: false,
       }
-    this.addEducation = this.addEducation.bind(this); 
-    this.addExperience = this.addExperience.bind(this); 
+    this.addEducationField = this.addEducationField.bind(this); 
     this.handleChange = this.handleChange.bind(this); 
-
+    this.recieveDataFromChild = this.recieveDataFromChild.bind(this); 
+    this.submitForm = this.submitForm.bind(this); 
   }
 
-  addEducation(e) {
-    e.preventDefault();
+  addEducationField(e) {
+   e.preventDefault();
     this.setState({
-     education: this.state.education.concat(this.state.institution)
+     education: this.state.education.concat(this.state.institution),
+     institution: {
+      id: uniqid(),
+     }
      })
-        //console.log(this.state.education);
+     console.log(this.state.institution.id)
   }
 
-  addExperience(e){
-    e.preventDefault(); 
-    this.setState({
-      experience: this.state.experience.concat(this.state.company),
-      
-    })
-  }
 
   handleChange(e){
     this.setState({
       [e.target.id]: e.target.value,
     })
-    console.log(e.target.id)
+   // console.log(e.target.id)
+  }
+
+  recieveDataFromChild(data){
+    this.setState({
+      institution: {
+        data
+      }
+    })
+  }
+
+  submitForm(e){
+    e.preventDefault();
+    this.setState({
+      show: true, 
+    })
   }
   
+
   
   render(){
-    const {fullname, email, phone, education} = this.state;
+    const {fullname, email, phone, education, show} = this.state;
     return(
-      <form>
+      <div>
+      <form onSubmit={this.submitForm}>
         <fieldset>
           <label>
             Fullname: 
@@ -78,10 +80,18 @@ class App extends React.Component{
           </label>
         </fieldset>
         <div>
-        <button onClick={this.addEducation}>ADD Education</button>
-        <Education handleChange={this.handleChange} data={education}/> 
+        <button onClick={this.addEducationField}>ADD Education</button>
+        {
+          education.map((institution) => {
+           return <Education key={institution.id} recieve={this.recieveDataFromChild} data={institution}/> 
+          })
+        }
+        
         </div>
+        <button type="submit">Create CV</button>
       </form>
+      <Overview cv={this.state} visualization={show}/> 
+      </div>
     )
   }
 }

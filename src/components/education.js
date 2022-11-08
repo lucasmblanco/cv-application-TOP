@@ -1,37 +1,57 @@
-import React from "react";
+import React from "react"; 
 
-const Education = (props) => {
-    const {handleChange, data } = props; 
+class Education extends React.Component {
+    constructor(props){
+        super(props); 
+        this.state = {
+                name: '', 
+                title: '', 
+                from: '',
+                to: '', 
+        }
+        this.handleChange = this.handleChange.bind(this); 
+    }
+ 
 
-    return(
-        <div>
-        {
-            data.map((element) => {
-                console.log(element)
-               return <div key={element.id}>
+    handleChange(e){
+        this.setState({
+            [e.target.id]: e.target.value,
+        })
+        this.props.recieve(this.state)
+    }
+
+    render(){
+        const { name, title, from, to} = this.state;  
+            return(
+                    <div key={this.props.data.id}>
                         <label>
                             Institution name: 
-                            <input type="text" id="name" name="name" value={element.name} onChange={handleChange}></input>
+                            <input type="text" id="name" name="name" value={name} onChange={this.handleChange}></input>
                         </label>
                         <label>
                             Title:
-                            <input type="text" id="title" name="title" value={element.title} onChange={handleChange}></input>
+                            <input type="text" id="title" name="title" value={title}onChange={this.handleChange}></input>
                         </label>
                         <label>
                             From:
-                            <input type="date" id="from" name="from" value={element.from} onChange={handleChange}></input>
+                            <input type="date" id="from" name="from"  value={from} onChange={this.handleChange}></input>
                         </label>
                         <label>
                             To:
-                            <input type="date" id="to" name="to" value={element.to} onChange={handleChange}></input>
+                            <input type="date" id="to" name="to" value={to} onChange={this.handleChange}></input>
                         </label>
                     </div>
-            })
-        }
-        </div>
+            
+            )
         
         
-    )
+        
+        
+    
+}
+    
+
+    
 }
 
 
