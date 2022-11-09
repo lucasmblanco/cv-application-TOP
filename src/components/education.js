@@ -4,6 +4,8 @@ class Education extends React.Component {
     constructor(props){
         super(props); 
         this.state = {
+                id: this.props.data.id,
+                index: this.props.dataNumber, 
                 name: '', 
                 title: '', 
                 from: '',
@@ -17,7 +19,7 @@ class Education extends React.Component {
         this.setState({
             [e.target.id]: e.target.value,
         })
-        this.props.recieve(this.state)
+        this.props.recieve(this.state, this.state.index)
     }
 
     render(){

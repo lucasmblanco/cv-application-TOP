@@ -12,14 +12,16 @@ class App extends React.Component{
         fullname: '',
         email: '',
         phone: '', 
-        education: [], 
-        institution: {
-          id: uniqid(), 
-          name: '',
-          title: '',
-          from: '',
-          to: '',
-        },
+        education: [
+          {
+            id: uniqid(), 
+            name: '',
+            title: '',
+            from: '',
+            to: '',
+          },
+        ], 
+        
         show: false,
       }
     this.addEducationField = this.addEducationField.bind(this); 
@@ -31,16 +33,14 @@ class App extends React.Component{
   addEducationField(e) {
    e.preventDefault();
     this.setState({
-     education: this.state.education.concat(this.state.institution),
-     institution: {
+    education: this.state.education.concat({
       id: uniqid(),
       name: '',
       title: '',
       from: '',
       to: '',
-     }
+     }),
      })
-     console.log(this.state.institution.id)
   }
 
 
@@ -51,16 +51,17 @@ class App extends React.Component{
    // console.log(e.target.id)
   }
 
-  recieveDataFromChild(data){
-    this.setState({
-      institution: {
-        id: this.state.institution.id,
-        name: data.name,
-        title: data.title, 
-        from: data.from,
-        to: data.to, 
-      }
-    })
+  recieveDataFromChild(data, index){
+    console.log(index);
+    let newEducation = [...this.state.education]; 
+    let institution = {...newEducation[index]}; 
+    institution.id = data.id; 
+    institution.name = data.name;
+    institution.title = data.title;
+    institution.from = data.from;
+    institution.to = data.to; 
+    newEducation[index] = institution; 
+    this.setState({ education: newEducation })
   }
 
   submitForm(e){
@@ -94,8 +95,8 @@ class App extends React.Component{
         <div>
         <button onClick={this.addEducationField}>ADD Education</button>
         {
-          education.map((institution) => {
-           return <Education key={institution.id} recieve={this.recieveDataFromChild} data={institution}/> 
+          education.map((element, index) => {
+           return <Education key={element.id} recieve={this.recieveDataFromChild} data={element} dataNumber={index}/> 
           })
         }
         
