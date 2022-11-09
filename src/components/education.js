@@ -5,7 +5,6 @@ class Education extends React.Component {
         super(props); 
         this.state = {
                 id: this.props.data.id,
-                index: this.props.dataNumber, 
                 name: '', 
                 title: '', 
                 from: '',
@@ -19,7 +18,7 @@ class Education extends React.Component {
         this.setState({
             [e.target.id]: e.target.value,
         })
-        this.props.recieve(this.state, this.state.index)
+        this.props.onInput(this.props.dataNumber, e.target.id, this.state[e.target.id])
     }
 
     render(){
@@ -42,6 +41,7 @@ class Education extends React.Component {
                             To:
                             <input type="date" id="to" name="to" value={to} onChange={this.handleChange}></input>
                         </label>
+                        <button onClick={this.props.deleteFunc} data-number={this.props.dataNumber} className="education-field">Delete</button>
                     </div>
             
             )

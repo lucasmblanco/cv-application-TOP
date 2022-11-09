@@ -21,13 +21,13 @@ class App extends React.Component{
             to: '',
           },
         ], 
-        
         show: false,
       }
     this.addEducationField = this.addEducationField.bind(this); 
     this.handleChange = this.handleChange.bind(this); 
     this.recieveDataFromChild = this.recieveDataFromChild.bind(this); 
     this.submitForm = this.submitForm.bind(this); 
+    this.deleteTask = this.deleteTask.bind(this); 
   }
 
   addEducationField(e) {
@@ -51,8 +51,16 @@ class App extends React.Component{
    // console.log(e.target.id)
   }
 
-  recieveDataFromChild(data, index){
+  recieveDataFromChild(index, name, data){
     console.log(index);
+    let newEducation = [...this.state.education]; 
+    let institution = {...newEducation[index]}; 
+    institution[name] = data;
+    newEducation[index] = institution; 
+    this.setState({ education: newEducation })
+  }
+
+  /* recieveDataFromChild(data, index){
     let newEducation = [...this.state.education]; 
     let institution = {...newEducation[index]}; 
     institution.id = data.id; 
@@ -62,7 +70,7 @@ class App extends React.Component{
     institution.to = data.to; 
     newEducation[index] = institution; 
     this.setState({ education: newEducation })
-  }
+  }*/
 
   submitForm(e){
     e.preventDefault();
@@ -72,13 +80,24 @@ class App extends React.Component{
   }
   
 
-  
+  deleteTask(e){
+    e.preventDefault(); 
+    if(e.target.classList.contains("education-field")){
+      this.setState({
+        education: this.state.education.filter((_, index) => {
+         return index !== Number(e.target.dataset.number)
+        })
+      })
+    }
+  }
+
   render(){
     const {fullname, email, phone, education, show} = this.state;
     return(
       <div>
       <form onSubmit={this.submitForm}>
         <fieldset>
+          <legend>Basic Information</legend>
           <label>
             Fullname: 
             <input type="text" id="fullname"  name="fullname" value={fullname} onChange={this.handleChange}></input>
@@ -92,15 +111,22 @@ class App extends React.Component{
             <input type="tel" id="phone" name="phone" value={phone} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" onChange={this.handleChange}></input>
           </label>
         </fieldset>
-        <div>
-        <button onClick={this.addEducationField}>ADD Education</button>
-        {
-          education.map((element, index) => {
-           return <Education key={element.id} recieve={this.recieveDataFromChild} data={element} dataNumber={index}/> 
-          })
-        }
-        
-        </div>
+        <fieldset className="education-field">
+          <legend>Education</legend>
+          <button onClick={this.addEducationField}>ADD Education</button>
+          {
+            education.map((element, index) => { 
+            return <Education key={element.id} onInput={this.recieveDataFromChild} data={element} dataNumber={index} deleteFunc={this.deleteTask}/> 
+            })
+          }
+        </fieldset>
+        <fieldset>
+          <legend>Experience</legend>
+          <button>ADD Experience</button>
+          {
+
+          }
+        </fieldset>
         <button type="submit">Create CV</button>
       </form>
       <Overview cv={this.state} visualization={show}/> 
