@@ -48,17 +48,8 @@ class Experience extends React.Component {
                         </label>
                         <button onClick={this.props.deleteFunc} data-number={this.props.dataNumber} className="experience-field">Delete</button>
                     </div>
-            
             )
-        
-        
-        
-        
-    
-}
-    
-
-    
+        }
 }
 
 

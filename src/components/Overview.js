@@ -5,7 +5,7 @@ class Overview extends React.Component{
 
 
     render(){
-        const {fullname, email, phone, education} = this.props.cv
+        const {fullname, email, phone, education, experience} = this.props.cv
         return( this.props.visualization ? 
             <div>
                 <div>{fullname}</div>
@@ -16,6 +16,17 @@ class Overview extends React.Component{
                         return  <div key={institution.id}>
                                 <div>{institution.name}</div>
                                 <div>{institution.title}</div>
+                                <div>{institution.from}</div>
+                                <div>{institution.to}</div>
+                                </div>
+                    })
+                }
+                {
+                    experience.map((institution) => {
+                        return  <div key={institution.id}>
+                                <div>{institution.name}</div>
+                                <div>{institution.position}</div>
+                                <div>{institution.task}</div>
                                 <div>{institution.from}</div>
                                 <div>{institution.to}</div>
                                 </div>
