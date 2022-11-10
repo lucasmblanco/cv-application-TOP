@@ -123,6 +123,12 @@ class App extends React.Component{
          return index !== Number(e.target.dataset.number)
         })
       })
+    } else {
+      this.setState({
+        experience: this.state.experience.filter((_, index) => {
+         return index !== Number(e.target.dataset.number)
+        })
+      })
     }
   }
 
@@ -146,7 +152,7 @@ class App extends React.Component{
             <input type="tel" id="phone" name="phone" value={phone} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" onChange={this.handleChange}></input>
           </label>
         </fieldset>
-        <fieldset className="education-field">
+        <fieldset>
           <legend>Education</legend>
           <button onClick={this.addEducationField}>ADD Education</button>
           {

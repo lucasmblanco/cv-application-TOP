@@ -46,7 +46,7 @@ class Experience extends React.Component {
                             To:
                             <input type="date" id="to" name="to" value={to} onChange={this.handleChange}></input>
                         </label>
-                        <button onClick={this.props.deleteFunc} data-number={this.props.dataNumber} className="education-field">Delete</button>
+                        <button onClick={this.props.deleteFunc} data-number={this.props.dataNumber} className="experience-field">Delete</button>
                     </div>
             
             )
