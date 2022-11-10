@@ -2,8 +2,9 @@ import './App.scss';
 import React from "react"; 
 import Education from './components/education'; 
 //import Experience from "./components/experience";
-import uniqid from "uniqid"
+//import uniqid from "uniqid"
 import Overview from './components/Overview';
+import Experience from './components/experience';
 
 class App extends React.Component{
   constructor(props){
@@ -14,12 +15,22 @@ class App extends React.Component{
         phone: '', 
         education: [
           {
-            id: uniqid(), 
+            id: Math.random().toString(16).slice(2), 
             name: '',
             title: '',
             from: '',
             to: '',
           },
+        ],
+        experience: [
+          {
+            id: Math.random().toString(16).slice(2), 
+            name: '',
+            position: '',
+            task: '', 
+            from: '',
+            to: '',
+          }
         ], 
         show: false,
       }
@@ -28,13 +39,15 @@ class App extends React.Component{
     this.recieveDataFromChild = this.recieveDataFromChild.bind(this); 
     this.submitForm = this.submitForm.bind(this); 
     this.deleteTask = this.deleteTask.bind(this); 
+    this.recieveDataFromChildExperience = this.recieveDataFromChildExperience.bind(this); 
+    this.addExperienceField = this.addExperienceField.bind(this); 
   }
 
   addEducationField(e) {
    e.preventDefault();
     this.setState({
     education: this.state.education.concat({
-      id: uniqid(),
+      id: Math.random().toString(16).slice(2),
       name: '',
       title: '',
       from: '',
@@ -43,6 +56,19 @@ class App extends React.Component{
      })
   }
 
+  addExperienceField(e){
+    e.preventDefault();
+    this.setState({
+    experience: this.state.experience.concat({
+      id: Math.random().toString(16).slice(2),
+      name: '',
+      position: '',
+      task: '',
+      from: '',
+      to: '',
+     }),
+     })
+  }
 
   handleChange(e){
     this.setState({
@@ -52,7 +78,7 @@ class App extends React.Component{
   }
 
   recieveDataFromChild(index, name, data){
-    console.log(index);
+   // console.log(index);
     let newEducation = [...this.state.education]; 
     let institution = {...newEducation[index]}; 
     institution[name] = data;
@@ -60,6 +86,15 @@ class App extends React.Component{
     this.setState({ education: newEducation })
   }
 
+
+  recieveDataFromChildExperience(index, name, data){
+    // console.log(index);
+     let newExperience = [...this.state.experience]; 
+     let institution = {...newExperience[index]}; 
+     institution[name] = data;
+     newExperience[index] = institution; 
+     this.setState({ experience: newExperience })
+   }
   /* recieveDataFromChild(data, index){
     let newEducation = [...this.state.education]; 
     let institution = {...newEducation[index]}; 
@@ -92,7 +127,7 @@ class App extends React.Component{
   }
 
   render(){
-    const {fullname, email, phone, education, show} = this.state;
+    const {fullname, email, phone, education, experience, show} = this.state;
     return(
       <div>
       <form onSubmit={this.submitForm}>
@@ -122,9 +157,11 @@ class App extends React.Component{
         </fieldset>
         <fieldset>
           <legend>Experience</legend>
-          <button>ADD Experience</button>
+          <button onClick={this.addExperienceField}>ADD Experience</button>
           {
-
+            experience.map((element, index) => { 
+              return <Experience key={element.id} onInput={this.recieveDataFromChildExperience} data={element} dataNumber={index} deleteFunc={this.deleteTask}/> 
+              })
           }
         </fieldset>
         <button type="submit">Create CV</button>

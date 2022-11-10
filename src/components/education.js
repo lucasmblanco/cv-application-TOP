@@ -14,8 +14,8 @@ class Education extends React.Component {
     }
  
 
-    handleChange(e){
-        this.setState({
+   async handleChange(e){
+       await this.setState({
             [e.target.id]: e.target.value,
         })
         this.props.onInput(this.props.dataNumber, e.target.id, this.state[e.target.id])
