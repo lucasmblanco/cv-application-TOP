@@ -1,10 +1,10 @@
+import "./reset.scss"; 
 import './App.scss';
 import React from "react"; 
 import Education from './components/education'; 
-//import Experience from "./components/experience";
-//import uniqid from "uniqid"
 import Overview from './components/Overview';
 import Experience from './components/experience';
+import NewWindow from 'react-new-window'
 
 class App extends React.Component{
   constructor(props){
@@ -74,11 +74,9 @@ class App extends React.Component{
     this.setState({
       [e.target.id]: e.target.value,
     })
-   // console.log(e.target.id)
   }
 
   recieveDataFromChild(index, name, data){
-   // console.log(index);
     let newEducation = [...this.state.education]; 
     let institution = {...newEducation[index]}; 
     institution[name] = data;
@@ -88,24 +86,12 @@ class App extends React.Component{
 
 
   recieveDataFromChildExperience(index, name, data){
-    // console.log(index);
      let newExperience = [...this.state.experience]; 
      let institution = {...newExperience[index]}; 
      institution[name] = data;
      newExperience[index] = institution; 
      this.setState({ experience: newExperience })
    }
-  /* recieveDataFromChild(data, index){
-    let newEducation = [...this.state.education]; 
-    let institution = {...newEducation[index]}; 
-    institution.id = data.id; 
-    institution.name = data.name;
-    institution.title = data.title;
-    institution.from = data.from;
-    institution.to = data.to; 
-    newEducation[index] = institution; 
-    this.setState({ education: newEducation })
-  }*/
 
   submitForm(e){
     e.preventDefault();
@@ -136,54 +122,68 @@ class App extends React.Component{
     const {fullname, email, phone, education, experience, show} = this.state;
     return(
       <div>
-      <form onSubmit={this.submitForm}>
-        <fieldset>
+        <div className='title'>
+        <h1>CURRICULUM GENERATOR </h1>
+        <h2>mini</h2>
+        </div>
+        <div className='form-container'>
+        <form onSubmit={this.submitForm}>
+        <fieldset className='basic-information'>
           <legend>Basic Information</legend>
+          <p>Share your contact information so people can reach to you.</p>
           <label>
-            Fullname: 
+            Fullname 
             <input type="text" id="fullname"  name="fullname" value={fullname} onChange={this.handleChange}></input>
           </label>
           <label>
-            Email:
+            Email
             <input type="email" id="email" name="email" value={email} onChange={this.handleChange}></input>
           </label>
           <label>
-            Phone Number:
+            Phone Number
             <input type="tel" id="phone" name="phone" value={phone} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" onChange={this.handleChange}></input>
           </label>
         </fieldset>
-        <fieldset>
-          <legend>Education</legend>
-          <button onClick={this.addEducationField}>ADD Education</button>
+        <fieldset className='education-field'>
+          <legend>Education</legend> 
+          <p>Having a degree demonstrates an ability to learn. Although not required, you may include it if you wish to share.</p>
+          <div className="button-container">
+            <button onClick={this.addEducationField}>ADD</button>
+          </div>
+         
           {
             education.map((element, index) => { 
             return <Education key={element.id} onInput={this.recieveDataFromChild} data={element} dataNumber={index} deleteFunc={this.deleteTask}/> 
             })
           }
         </fieldset>
-        <fieldset>
+        <fieldset className='experience-field'>
           <legend>Experience</legend>
-          <button onClick={this.addExperienceField}>ADD Experience</button>
+          <p>Employers love practical experience. Show them what skills you bring to the table.</p>
+          <div className="button-container">
+            <button onClick={this.addExperienceField}>ADD</button>
+          </div>
+          
           {
             experience.map((element, index) => { 
               return <Experience key={element.id} onInput={this.recieveDataFromChildExperience} data={element} dataNumber={index} deleteFunc={this.deleteTask}/> 
               })
           }
         </fieldset>
-        <button type="submit">Create CV</button>
+        <div className="container-submit-button">
+          <button type="submit" >GENERATE</button>
+        </div>
+        
       </form>
-      <Overview cv={this.state} visualization={show}/> 
+        </div>
+          {
+            show ?  <NewWindow> 
+              <Overview cv={this.state} /> 
+            </NewWindow> : null
+          }
       </div>
     )
   }
 }
 
 export default App
-
-/* <fieldset>
-          <button onClick={this.addExperience}>Add Experience</button>
-          {
-            experience.map(() => {return <Experience />})
-          }
-        </fieldset>
-        */
