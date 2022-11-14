@@ -1,10 +1,13 @@
 import "./reset.scss"; 
 import './App.scss';
+import "./assets/Overview.scss"; 
 import React from "react"; 
 import Education from './components/education'; 
 import Overview from './components/Overview';
 import Experience from './components/experience';
 import NewWindow from 'react-new-window'
+
+
 
 class App extends React.Component{
   constructor(props){
@@ -29,7 +32,7 @@ class App extends React.Component{
             position: '',
             task: '', 
             from: '',
-            to: '',
+            to: 'Present',
           }
         ], 
         show: false,
@@ -65,7 +68,7 @@ class App extends React.Component{
       position: '',
       task: '',
       from: '',
-      to: '',
+      to: 'Present',
      }),
      })
   }
@@ -97,7 +100,7 @@ class App extends React.Component{
     e.preventDefault();
     this.setState({
       show: true, 
-    })
+    });
   }
   
 
@@ -118,13 +121,17 @@ class App extends React.Component{
     }
   }
 
+  test(){
+    window.location.reload();
+  }
+
   render(){
     const {fullname, email, phone, education, experience, show} = this.state;
     return(
       <div>
         <div className='title'>
         <h1>CURRICULUM GENERATOR </h1>
-        <h2>mini</h2>
+
         </div>
         <div className='form-container'>
         <form onSubmit={this.submitForm}>
@@ -176,10 +183,10 @@ class App extends React.Component{
         
       </form>
         </div>
-          {
-            show ?  <NewWindow> 
-              <Overview cv={this.state} /> 
-            </NewWindow> : null
+          { 
+            show ?  <NewWindow title={fullname}  features={{  width: '1000', height: '1000' }}> 
+                      <Overview cv={this.state} /> 
+                    </NewWindow> : null
           }
       </div>
     )
