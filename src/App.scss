@@ -16,22 +16,46 @@
          url("./assets/Inter-Regular.woff") format("woff");
   }  
 
+  @font-face {
+    font-family: 'Inter-SemiBold';
+    font-style:  normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("./assets/Inter-SemiBold.woff2") format("woff2"),
+         url("./assets/Inter-SemiBold.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: 'Inter-Medium';
+    font-style:  normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("./assets/Inter-Medium.woff2") format("woff2"),
+         url("./assets/Inter-Medium.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: 'Inter-Italic';
+    font-style:  italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("./assets/Inter-Italic.woff2") format("woff2"),
+         url("./assets/Inter-Italic.woff") format("woff");
+  }
+
 div.title{
     display: flex;
     align-items: center;
     justify-content: center;
-
+    height: 100px;
 
     h1 {
+        font-size: 30px;
         font-family: 'Inter-ExtraBold', helvetica;
         color: rgb(231, 46, 93)
     }
 
-    h2{
-        font-family: 'Inter-ExtraBold', helvetica;
-        color: rgb(104, 100, 100);
-        margin: 3px;
-    }
+   
 }
 
 
