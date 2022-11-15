@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/cv-application-TOP/static/css/main.1dd13ecf.css",
+    "main.js": "/cv-application-TOP/static/js/main.11ea0cfb.js",
+    "static/media/Inter-Italic.woff": "/cv-application-TOP/static/media/Inter-Italic.890025e726861dba417f.woff",
+    "static/media/Inter-SemiBold.woff": "/cv-application-TOP/static/media/Inter-SemiBold.cca62d21c8c555c392e5.woff",
+    "static/media/Inter-ExtraBold.woff": "/cv-application-TOP/static/media/Inter-ExtraBold.d0fa3bb2b7c9063dc594.woff",
+    "static/media/Inter-Medium.woff": "/cv-application-TOP/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
+    "static/media/Inter-Regular.woff": "/cv-application-TOP/static/media/Inter-Regular.8c206db99195777c6769.woff",
+    "static/media/Inter-Italic.woff2": "/cv-application-TOP/static/media/Inter-Italic.cb10ffd7684cd9836a05.woff2",
+    "static/media/Inter-ExtraBold.woff2": "/cv-application-TOP/static/media/Inter-ExtraBold.cbe0ae49c52c920fd563.woff2",
+    "static/media/Inter-Medium.woff2": "/cv-application-TOP/static/media/Inter-Medium.293fd13dbca5a3e450ef.woff2",
+    "static/media/Inter-SemiBold.woff2": "/cv-application-TOP/static/media/Inter-SemiBold.b5f0f109bc88052d4000.woff2",
+    "static/media/Inter-Regular.woff2": "/cv-application-TOP/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
+    "index.html": "/cv-application-TOP/index.html",
+    "main.1dd13ecf.css.map": "/cv-application-TOP/static/css/main.1dd13ecf.css.map",
+    "main.11ea0cfb.js.map": "/cv-application-TOP/static/js/main.11ea0cfb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1dd13ecf.css",
+    "static/js/main.11ea0cfb.js"
+  ]
+}
