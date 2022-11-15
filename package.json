@@ -1,7 +1,7 @@
 {
   "name": "cv-project",
   "version": "0.1.0",
-  "homepage": "https://Lucas.github.io/cv-application-TOP",
+  "homepage": "https://lucasmblanco.github.io/cv-application-TOP",
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^3.0.0",
